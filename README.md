@@ -42,4 +42,4 @@ a different location later.
 ### 5. Setup the launchfile
 
 Change the file `launch.sh` in your repository to
-launch your code.# dukiebot-1.0
+launch your code.

@@ -1,5 +1,5 @@
 # parameters
-ARG REPO_NAME="<REPO_NAME_HERE>"
+ARG REPO_NAME="demo_repo"
 
 # ==================================================>
 # ==> Do not change this code
@@ -20,6 +20,7 @@ WORKDIR "${REPO_PATH}"
 RUN mkdir -p "${REPO_PATH}"
 
 # copy dependencies files only
+RUN ls -la
 COPY ./dependencies-apt.txt "${REPO_PATH}/"
 COPY ./dependencies-py.txt "${REPO_PATH}/"
 
@@ -35,6 +36,9 @@ RUN pip install -r ${REPO_PATH}/dependencies-py.txt
 # copy the source code
 COPY . "${REPO_PATH}/"
 
+RUN cp -r "${REPO_PATH}/packages/dt-core" "${CATKIN_WS_DIR}/src/"
+RUN rm -r "${REPO_PATH}/packages/dt-core"
+
 # build packages
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh && \
   catkin build \
@@ -48,5 +52,8 @@ CMD ["bash", "-c", "${LAUNCHFILE}"]
 # <== Do not change this code
 # <==================================================
 
+
+
+
 # maintainer
-LABEL maintainer="<YOUR_FULL_NAME> (<YOUR_EMAIL_ADDRESS>)"
+LABEL maintainer="Konstantin Chaika (pro100kot14@gmail.com)"
